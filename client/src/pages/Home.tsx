@@ -8,6 +8,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { withBase } from "@/lib/paths";
+import { consumePendingSectionScroll, scrollToSectionWhenReady } from "@/lib/scrollNavigation";
 
 // ─── Scroll Reveal Hook ───────────────────────────────────────────────────────
 function useReveal() {
@@ -66,7 +67,7 @@ function Hero() {
     <section
       ref={sectionRef}
       id="home"
-      className="hero-masthead relative flex flex-col justify-end overflow-hidden"
+      className="hero-masthead relative overflow-hidden"
       style={{ background: gradientBg, transition: "background 0.6s ease" }}
       onMouseMove={handleMouseMove}
     >
@@ -181,7 +182,7 @@ function Hero() {
 
         {/* Tagline + CTA row */}
         <div
-          className="hero-masthead__cta flex flex-col md:flex-row md:items-end gap-8 mt-12"
+          className="hero-masthead__cta flex flex-col md:flex-row md:items-end gap-8"
           style={{
             opacity: loaded ? 1 : 0,
             transform: loaded ? "translateY(0)" : "translateY(24px)",
@@ -201,7 +202,7 @@ function Hero() {
           >
             Uniting media artists in the Greater Boston area for creative projects, community, and networking.
           </p>
-          <div className="flex gap-4 flex-shrink-0">
+          <div className="hero-masthead__learn-more flex gap-4 flex-shrink-0">
             <a
               href="#about"
               style={{
@@ -383,7 +384,7 @@ function About() {
         </div>
 
         {/* Two-column layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+        <div className="section-intro-grid grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
           {/* Left: Heading */}
           <div ref={headingRef} className="reveal">
             <h2
@@ -565,7 +566,7 @@ function Goals() {
         </div>
 
         {/* Heading */}
-        <div ref={headingRef} className="reveal mb-2">
+        <div ref={headingRef} className="reveal mb-2 section-heading-block">
           <h2
             style={{
               fontFamily: "'Space Grotesk', sans-serif",
@@ -587,7 +588,7 @@ function Goals() {
 
         {/* Goals grid — 3 cols desktop, 2 cols tablet, 1 col mobile */}
         <div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-16"
+          className="section-content-after-heading grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-16"
           style={{ borderLeft: "1px solid #D8D7D3", borderBottom: "1px solid #D8D7D3" }}
         >
           {goals.map((goal, i) => (
@@ -604,19 +605,22 @@ const team = [
   {
     name: "Vidisha Agarwalla",
     role: "Founder & Co-President",
-    photo: "/images/team-vidisha.webp",
+    photo: "/images/team/vidisha.webp",
+    photoHover: "/images/team/vidisha-hover.webp",
     bio: "Vidisha Agarwalla (she/her) is a Communications and Marketing Expert, Actor, and Creative from Singapore. She is currently the Communications and Operations Specialist at the Associates of the Boston Public Library. Originally from Singapore, Vidisha strives to diversify the theatre and performing arts communities. She is looking forward to continuing to work in the arts in Boston. To connect over theatre (or the best Bubble Tea places in Boston).",
   },
   {
     name: "Anna Julia (AJ)",
     role: "Founder & Co-President",
-    photo: "/images/team-aj.webp",
+    photo: "/images/team/anna.webp",
+    photoHover: "/images/team/anna-hover.webp",
     bio: "Anna Julia (she/her), also known as AJ, is a media creator and brand consultant from Boston, MA. She has experience working in brand direction, social media management, influencer marketing, and design. She also runs her own studio, Anna Julia Studios, specializing in commercial production for local brands. AJ graduated from Northeastern University in 2023, and she continues to live and work in the Boston area.",
   },
   {
     name: "Katelyn Paddock",
     role: "Development Manager",
-    photo: "/images/team-katelyn.webp",
+    photo: "/images/team/katelyn.webp",
+    photoHover: "/images/team/katelyn-hover.webp",
     bio: "Katelyn Paddock is a Boston-based theatre artist and arts administrator. Katelyn loves projects of all shapes and sizes, but particularly enjoys new work development, accessibility at all levels of the artistic experience, and challenging the idea of what good art is, who it is for, or what it should be. She is the Operations Supervisor for the Huntington Theatre and has collaborated with arts organizations throughout New England, including Foul Contending Rebels Theatre Collective, Playhouse on Park, Fresh Ink Theatre, Saint Michael's Playhouse, Vermont Stage Company, and Hovey Players.",
   },
 ];
@@ -672,6 +676,7 @@ function TeamCard({ member, delay, isOpen, onToggle }: {
       >
         {/* Photo with circle mask */}
         <div
+          className="team-card-photo"
           style={{
             width: "100%",
             maxWidth: "min(75vw, 300px)",
@@ -687,17 +692,26 @@ function TeamCard({ member, delay, isOpen, onToggle }: {
           }}
         >
           <img
+            className="team-card-photo__portrait"
             src={withBase(member.photo)}
             alt={member.name}
+            width={600}
+            height={600}
+            loading="lazy"
+            decoding="async"
             style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "top center",
-              display: "block",
               filter: isOpen ? "none" : "grayscale(15%)",
-              transition: "filter 0.35s ease",
             }}
+          />
+          <img
+            className="team-card-photo__hover"
+            src={withBase(member.photoHover)}
+            alt=""
+            width={600}
+            height={600}
+            loading="lazy"
+            decoding="async"
+            aria-hidden="true"
           />
         </div>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%", gap: "0.5rem" }}>
@@ -780,6 +794,10 @@ function BioPanelContent({ member }: { member: typeof team[0] }) {
         <img
           src={withBase(member.photo)}
           alt={member.name}
+          width={64}
+          height={64}
+          loading="lazy"
+          decoding="async"
           style={{
             width: "64px",
             height: "64px",
@@ -1064,20 +1082,11 @@ function JoinCTA() {
 
 // ─── Main Page ────────────────────────────────────────────────────────────────
 export default function Home() {
-  // Handle cross-page anchor navigation (from footer or other pages)
+  // Cross-page nav (e.g. Services → Team): scroll after mount; ScrollToTop skips while pending.
   useEffect(() => {
-    const anchor = sessionStorage.getItem("scrollTo");
+    const anchor = consumePendingSectionScroll();
     if (anchor) {
-      sessionStorage.removeItem("scrollTo");
-      const tryScroll = (attempts = 0) => {
-        const el = document.getElementById(anchor);
-        if (el) {
-          el.scrollIntoView({ behavior: "smooth", block: "start" });
-        } else if (attempts < 12) {
-          setTimeout(() => tryScroll(attempts + 1), 100);
-        }
-      };
-      setTimeout(() => tryScroll(), 120);
+      setTimeout(() => scrollToSectionWhenReady(anchor), 120);
     }
   }, []);
 

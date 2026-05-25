@@ -1,6 +1,7 @@
 import { useLayoutEffect } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { clearPendingSectionScroll, peekPendingSectionScroll } from "@/lib/scrollNavigation";
 import NotFound from "@/pages/NotFound";
 import { Route, Switch, Router as WouterRouter, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -17,6 +18,13 @@ function ScrollToTop() {
   const [location] = useLocation();
 
   useLayoutEffect(() => {
+    if (location === "/" && peekPendingSectionScroll()) {
+      // Home will scroll to the target section after mount.
+      return;
+    }
+    if (location !== "/") {
+      clearPendingSectionScroll();
+    }
     window.scrollTo(0, 0);
   }, [location]);
 

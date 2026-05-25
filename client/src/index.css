@@ -262,7 +262,19 @@
   }
 
   .section-heading-after-label {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-intro-grid {
+    gap: 1.5rem;
+  }
+
+  .section-content-after-heading {
+    margin-top: 1.5rem !important;
+  }
+
+  .section-heading-block {
+    margin-bottom: 0 !important;
   }
 }
 
@@ -270,24 +282,44 @@
   margin-bottom: 3rem;
 }
 
-/* Home — hero masthead */
+/* Home — hero masthead (leave room for ticker below) */
 .hero-masthead {
-  min-height: 100vh;
+  --hero-ticker-height: 3.25rem;
+  --hero-nav-height: 68px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  padding-top: var(--hero-nav-height);
+  min-height: calc(100vh - var(--hero-ticker-height));
+  min-height: calc(100dvh - var(--hero-ticker-height));
 }
 
 .hero-masthead__content {
-  padding-top: 10rem;
-  padding-bottom: 5rem;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.hero-masthead__label {
+  margin-bottom: 1rem !important;
+}
+
+.hero-masthead__cta {
+  margin-top: 1.5rem !important;
+}
+
+.hero-masthead__learn-more {
+  display: none;
 }
 
 @media (max-width: 767px) {
   .hero-masthead {
-    min-height: min(70vh, 520px);
+    min-height: min(calc(100dvh - var(--hero-ticker-height)), 520px);
   }
 
   .hero-masthead__content {
-    padding-top: 4.25rem;
-    padding-bottom: 1.5rem;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
   .hero-masthead__label {
@@ -298,6 +330,45 @@
     margin-top: 1.25rem !important;
     gap: 1rem !important;
   }
+
+  .hero-masthead__learn-more {
+    display: flex;
+  }
+}
+
+/* Home — team card photo hover swap */
+.team-card-photo {
+  position: relative;
+}
+
+.team-card-photo__portrait,
+.team-card-photo__hover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.team-card-photo__portrait {
+  transition:
+    filter 0.35s ease,
+    opacity 0.6s ease-in-out;
+}
+
+.team-card-photo__hover {
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
+}
+
+.team-card-photo:hover .team-card-photo__hover {
+  opacity: 1;
+}
+
+.team-card-photo:hover .team-card-photo__portrait {
+  opacity: 0;
 }
 
 /* Home — team bio panel */

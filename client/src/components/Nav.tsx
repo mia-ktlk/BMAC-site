@@ -4,8 +4,9 @@
  * Mobile: hamburger → slide-out drawer with backdrop and explicit close button.
  * Cross-page anchor navigation: navigate to / first, then scroll to anchor.
  */
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { withBase } from "@/lib/paths";
+import { scrollToSection, setPendingSectionScroll } from "@/lib/scrollNavigation";
 import { Link, useLocation } from "wouter";
 
 // Inject media-query styles once
@@ -28,7 +29,6 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [location, navigate] = useLocation();
-  const pendingAnchor = useRef<string | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -45,29 +45,14 @@ export default function Nav() {
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
-  // After navigating to home, scroll to pending anchor
-  useEffect(() => {
-    if (location === "/" && pendingAnchor.current) {
-      const id = pendingAnchor.current;
-      pendingAnchor.current = null;
-      const tryScroll = (attempts = 0) => {
-        const el = document.getElementById(id);
-        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-        else if (attempts < 10) setTimeout(() => tryScroll(attempts + 1), 100);
-      };
-      setTimeout(() => tryScroll(), 80);
-    }
-  }, [location]);
-
   const handleAnchorClick = (e: React.MouseEvent, anchor: string) => {
     e.preventDefault();
     setMenuOpen(false);
     const id = anchor.replace("#", "");
     if (location === "/") {
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      scrollToSection(id);
     } else {
-      pendingAnchor.current = id;
+      setPendingSectionScroll(id);
       navigate("/");
     }
   };

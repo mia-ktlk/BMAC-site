@@ -5,8 +5,8 @@
  * Mobile-responsive padding.
  */
 import { withBase } from "@/lib/paths";
+import { scrollToSection, setPendingSectionScroll } from "@/lib/scrollNavigation";
 import { Link, useLocation } from "wouter";
-import { useRef } from "react";
 
 // Helper: render either a wouter Link or a plain anchor
 function FooterLink({ href, external, children }: { href: string; external?: boolean; children: React.ReactNode }) {
@@ -42,7 +42,6 @@ function FooterLink({ href, external, children }: { href: string; external?: boo
 // Cross-page anchor link: if on home, smooth-scroll; otherwise navigate home then scroll
 function FooterAnchorLink({ anchor, label }: { anchor: string; label: string }) {
   const [location, navigate] = useLocation();
-  const pendingAnchor = useRef<string | null>(null);
 
   const style = {
     display: "block",
@@ -59,12 +58,9 @@ function FooterAnchorLink({ anchor, label }: { anchor: string; label: string }) 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
     if (location === "/") {
-      const el = document.getElementById(anchor);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      scrollToSection(anchor);
     } else {
-      pendingAnchor.current = anchor;
-      // Store in sessionStorage so the home page can pick it up after mount
-      sessionStorage.setItem("scrollTo", anchor);
+      setPendingSectionScroll(anchor);
       navigate("/");
     }
   };
