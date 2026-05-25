@@ -375,7 +375,7 @@ function About() {
     <section id="about" style={{ backgroundColor: "#FFFFFF", paddingTop: "clamp(4rem, 8vw, 8rem)", paddingBottom: "clamp(4rem, 8vw, 8rem)" }}>
       <div className="container">
         {/* Section label */}
-        <div ref={labelRef} className="reveal flex items-center gap-4 mb-16">
+        <div ref={labelRef} className="reveal flex items-center gap-4 section-label-row">
           <span style={{ color: "#E8474A", fontFamily: "'Space Grotesk'", fontWeight: 700, fontSize: "0.8rem", letterSpacing: "0.2em", textTransform: "uppercase" }}>
             01 — About
           </span>
@@ -557,7 +557,7 @@ function Goals() {
     <section id="goals" style={{ backgroundColor: "#F5F4F0", paddingTop: "clamp(4rem, 8vw, 8rem)", paddingBottom: "clamp(4rem, 8vw, 8rem)" }}>
       <div className="container">
         {/* Section label */}
-        <div ref={labelRef} className="reveal flex items-center gap-4 mb-16">
+        <div ref={labelRef} className="reveal flex items-center gap-4 section-label-row">
           <span style={{ color: "#E8474A", fontFamily: "'Space Grotesk'", fontWeight: 700, fontSize: "0.8rem", letterSpacing: "0.2em", textTransform: "uppercase" }}>
             02 — Our Pillars
           </span>
@@ -768,18 +768,15 @@ function TeamCard({ member, delay, isOpen, onToggle }: {
 function BioPanelContent({ member }: { member: typeof team[0] }) {
   return (
     <div
+      className="team-bio-panel"
       style={{
         backgroundColor: "#0F0F0F",
         padding: "clamp(1.25rem, 3vw, 2rem) clamp(1rem, 3vw, 2.5rem)",
         margin: "0.5rem 0 1.5rem",
-        display: "flex",
-        alignItems: "flex-start",
-        flexWrap: "wrap",
-        gap: "clamp(1rem, 2vw, 2rem)",
         borderLeft: "3px solid #E8474A",
       }}
     >
-      <div style={{ flexShrink: 0 }}>
+      <div className="team-bio-photo">
         <img
           src={withBase(member.photo)}
           alt={member.name}
@@ -793,14 +790,27 @@ function BioPanelContent({ member }: { member: typeof team[0] }) {
           }}
         />
       </div>
-      <div style={{ flex: 1, minWidth: 0 }}>
+      <div className="team-bio-identity">
         <p style={{ fontFamily: "'Space Grotesk'", fontWeight: 600, fontSize: "0.95rem", color: "#FFFFFF", marginBottom: "0.25rem" }}>
           {member.name}
         </p>
-        <p style={{ fontFamily: "'DM Sans'", fontWeight: 400, fontSize: "0.75rem", color: "#E8474A", letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: "0.85rem" }}>
+        <p style={{ fontFamily: "'DM Sans'", fontWeight: 400, fontSize: "0.75rem", color: "#E8474A", letterSpacing: "0.06em", textTransform: "uppercase", margin: 0 }}>
           {member.role}
         </p>
-        <p style={{ fontFamily: "'DM Sans'", fontWeight: 300, fontSize: "0.95rem", color: "rgba(255,255,255,0.7)", lineHeight: 1.7, margin: "0 0 1rem 0", maxWidth: "560px" }}>
+      </div>
+      <div className="team-bio-text">
+        <p
+          className="team-bio-body"
+          style={{
+            fontFamily: "'DM Sans'",
+            fontWeight: 300,
+            fontSize: "0.95rem",
+            color: "rgba(255,255,255,0.7)",
+            lineHeight: 1.7,
+            margin: 0,
+            maxWidth: "560px",
+          }}
+        >
           {member.bio}
         </p>
       </div>
@@ -863,7 +873,7 @@ function Team() {
     <section id="team" style={{ backgroundColor: "#FFFFFF", paddingTop: "clamp(4rem, 8vw, 8rem)", paddingBottom: "clamp(4rem, 8vw, 8rem)" }}>
       <div className="container">
         {/* Section label */}
-        <div ref={labelRef} className="reveal flex items-center gap-4 mb-16">
+        <div ref={labelRef} className="reveal flex items-center gap-4 section-label-row">
           <span style={{ color: "#E8474A", fontFamily: "'Space Grotesk'", fontWeight: 700, fontSize: "0.8rem", letterSpacing: "0.2em", textTransform: "uppercase" }}>
             03 — Team
           </span>
@@ -871,7 +881,7 @@ function Team() {
         </div>
 
         {/* Heading */}
-        <div ref={headingRef} className="reveal mb-16">
+        <div ref={headingRef} className="reveal mb-16 section-heading-after-label">
           <h2
             style={{
               fontFamily: "'Space Grotesk', sans-serif",
@@ -974,7 +984,7 @@ function JoinCTA() {
 
       <div className="container relative z-10">
         <div ref={ref} className="reveal">
-          <div className="flex items-center gap-4 mb-12">
+          <div className="flex items-center gap-4 section-label-row section-label-row--join">
             <span style={{ color: "#E8474A", fontFamily: "'Space Grotesk'", fontWeight: 700, fontSize: "0.8rem", letterSpacing: "0.2em", textTransform: "uppercase" }}>
               04 — Join
             </span>

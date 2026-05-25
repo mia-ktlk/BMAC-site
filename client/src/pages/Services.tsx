@@ -274,8 +274,8 @@ const services = [
 
 // ─── Community Portal Mock Preview ───────────────────────────────────────────
 const mockProfiles = [
-  { name: "Maya R.", role: "Filmmaker", tags: ["Narrative", "Documentary"], avatar: "MR", color: "#E8474A" },
-  { name: "Jordan K.", role: "Photographer", tags: ["Portrait", "Editorial"], avatar: "JK", color: "#7B3FBE" },
+  { name: "Maya R.", role: "Filmmaker", tags: ["Documentary"], avatar: "MR", color: "#E8474A" },
+  { name: "Jordan K.", role: "Photographer", tags: ["Editorial"], avatar: "JK", color: "#7B3FBE" },
   { name: "Sam T.", role: "Music Producer", tags: ["Electronic", "Score"], avatar: "ST", color: "#1A7A4A" },
   { name: "Priya N.", role: "Motion Designer", tags: ["2D", "Brand"], avatar: "PN", color: "#C47A1E" },
   { name: "Alex W.", role: "Illustrator", tags: ["Editorial", "Concept"], avatar: "AW", color: "#1E5FAA" },
@@ -532,14 +532,13 @@ function ServiceBlock({ service, index }: { service: typeof services[0]; index: 
           {/* Left: Number + Title + Description */}
           <div style={{ direction: "ltr" }}>
             <div
-              className="pillar-num-gradient"
+              className="pillar-num-gradient service-num"
               style={{
                 fontFamily: "'Space Grotesk'",
                 fontWeight: 700,
                 fontSize: "clamp(5rem, 10vw, 8rem)",
                 lineHeight: 1,
                 letterSpacing: "-0.04em",
-                marginBottom: "-1.5rem",
                 userSelect: "none",
               }}
             >
