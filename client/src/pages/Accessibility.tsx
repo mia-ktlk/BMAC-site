@@ -110,7 +110,7 @@ export default function Accessibility() {
 
             <LegalSection title="Third-Party Content">
               <p>
-                Some content on our site may be provided by or linked to third-party platforms (such as Instagram, LinkedIn, or our member portal). While we encourage these platforms to maintain accessible experiences, we cannot guarantee their compliance with accessibility standards. Please contact those services directly for accessibility-related concerns.
+                Some content on our site may be provided by or linked to third-party platforms (such as LinkedIn or our member portal). While we encourage these platforms to maintain accessible experiences, we cannot guarantee their compliance with accessibility standards. Please contact those services directly for accessibility-related concerns.
               </p>
             </LegalSection>
           </div>

@@ -149,7 +149,6 @@ export default function Footer() {
                 Connect
               </p>
               <FooterLink href="mailto:bostonmediaartistscollective@gmail.com">Email Us</FooterLink>
-              <FooterLink href="https://www.instagram.com/bmac.boston/" external>Instagram</FooterLink>
               <FooterLink href="https://www.linkedin.com/company/boston-media-artists-collective/" external>LinkedIn</FooterLink>
               <FooterLink href="/login">Log In</FooterLink>
             </div>
@@ -231,21 +230,6 @@ export default function Footer() {
             </p>
           </div>
           <div className="flex items-center gap-6">
-            <a
-              href="https://www.instagram.com/bmac.boston/"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: "rgba(255,255,255,0.35)", transition: "color 0.2s ease", textDecoration: "none" }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "#E8474A")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.35)")}
-              aria-label="Instagram"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                <circle cx="12" cy="12" r="4"/>
-                <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
-              </svg>
-            </a>
             <a
               href="https://www.linkedin.com/company/boston-media-artists-collective/"
               target="_blank"

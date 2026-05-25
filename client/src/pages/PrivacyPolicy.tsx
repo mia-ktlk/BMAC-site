@@ -88,7 +88,7 @@ export default function PrivacyPolicy() {
               <ul>
                 <li><strong>Softr</strong> — for member sign-up, login, and profile management</li>
                 <li><strong>Google Analytics</strong> — for anonymous website usage analytics</li>
-                <li><strong>Instagram / LinkedIn</strong> — for social media presence (governed by their own privacy policies)</li>
+                <li><strong>LinkedIn</strong> — for social media presence (governed by their own privacy policies)</li>
               </ul>
               <p>We encourage you to review the privacy policies of these services when interacting with them.</p>
             </LegalSection>
