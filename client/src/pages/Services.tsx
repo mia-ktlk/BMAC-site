@@ -531,16 +531,18 @@ function ServiceBlock({ service, index }: { service: typeof services[0]; index: 
         >
           {/* Left: Number + Title + Description */}
           <div style={{ direction: "ltr" }}>
-            <div style={{
-              fontFamily: "'Space Grotesk'",
-              fontWeight: 700,
-              fontSize: "clamp(5rem, 10vw, 8rem)",
-              lineHeight: 1,
-              color: service.dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.05)",
-              letterSpacing: "-0.04em",
-              marginBottom: "-1.5rem",
-              userSelect: "none",
-            }}>
+            <div
+              className="pillar-num-gradient"
+              style={{
+                fontFamily: "'Space Grotesk'",
+                fontWeight: 700,
+                fontSize: "clamp(5rem, 10vw, 8rem)",
+                lineHeight: 1,
+                letterSpacing: "-0.04em",
+                marginBottom: "-1.5rem",
+                userSelect: "none",
+              }}
+            >
               {service.number}
             </div>
             <h2 style={{

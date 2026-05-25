@@ -209,10 +209,53 @@
   z-index: 1;
 }
 
+/* Six pillars — animated gradient numbers */
+@keyframes pillar-gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.pillar-num-gradient {
+  background: linear-gradient(
+    115deg,
+    #e8474a 0%,
+    #ff5e3a 12%,
+    #ffbe0b 28%,
+    #8ac926 44%,
+    #00bbf9 60%,
+    #9b5de5 76%,
+    #f15bb5 88%,
+    #e8474a 100%
+  );
+  background-size: 280% 280%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: pillar-gradient-shift 24s ease-in-out infinite;
+}
+
+.pillar-num-hover {
+  color: rgba(255, 255, 255, 0.25);
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.25);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  .pillar-num-gradient {
+    animation: none;
+    background-size: 100% 100%;
   }
 }

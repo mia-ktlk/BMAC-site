@@ -506,14 +506,14 @@ function GoalCard({ goal, index }: { goal: typeof goals[0]; index: number }) {
       />
       <div style={{ position: "relative", zIndex: 1 }}>
         <div
+          className={hovered ? "pillar-num-hover" : "pillar-num-gradient"}
           style={{
             fontFamily: "'Space Grotesk'",
             fontWeight: 700,
             fontSize: "3rem",
-            color: hovered ? "rgba(255,255,255,0.25)" : "#E8474A",
             lineHeight: 1,
-            transition: "color 0.3s ease",
             marginBottom: "1.25rem",
+            transition: "color 0.3s ease, -webkit-text-fill-color 0.3s ease",
           }}
         >
           {goal.num}
