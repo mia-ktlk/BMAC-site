@@ -808,7 +808,6 @@ function BioPanelContent({ member }: { member: typeof team[0] }) {
             color: "rgba(255,255,255,0.7)",
             lineHeight: 1.7,
             margin: 0,
-            maxWidth: "560px",
           }}
         >
           {member.bio}

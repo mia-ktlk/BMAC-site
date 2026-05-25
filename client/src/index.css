@@ -292,6 +292,11 @@
 
 .team-bio-text {
   grid-area: bio;
+  min-width: 0;
+}
+
+.team-bio-body {
+  max-width: none;
 }
 
 @media (max-width: 767px) {
