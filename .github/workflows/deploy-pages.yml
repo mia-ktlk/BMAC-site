@@ -36,7 +36,8 @@ jobs:
       - name: Build static site
         run: |
           REPO="${{ github.event.repository.name }}"
-          if [[ "$REPO" == *".github.io" ]]; then
+          # Custom domain (CNAME) and *.github.io user sites are served from /
+          if [[ -f client/public/CNAME ]] || [[ "$REPO" == *".github.io" ]]; then
             export VITE_BASE_PATH="/"
           else
             export VITE_BASE_PATH="/${REPO}/"
@@ -46,16 +47,17 @@ jobs:
           echo "--- index.html asset refs ---"
           grep -E 'src=|href=' dist/public/index.html
 
-      - name: Verify asset paths include base
+      - name: Verify asset paths match base
         run: |
           REPO="${{ github.event.repository.name }}"
-          if [[ "$REPO" != *".github.io" ]]; then
-            if ! grep -q "/${REPO}/assets/" dist/public/index.html; then
-              echo "ERROR: index.html is missing /${REPO}/assets/ paths"
+          if [[ -f client/public/CNAME ]] || [[ "$REPO" == *".github.io" ]]; then
+            if ! grep -q 'href="/assets/' dist/public/index.html || ! grep -q 'src="/assets/' dist/public/index.html; then
+              echo "ERROR: expected root /assets/ paths for custom domain or user Pages site"
               exit 1
             fi
-            if grep -q 'href="/assets/' dist/public/index.html || grep -q 'src="/assets/' dist/public/index.html; then
-              echo "ERROR: index.html has root /assets/ paths (wrong base for project Pages)"
+          else
+            if ! grep -q "/${REPO}/assets/" dist/public/index.html; then
+              echo "ERROR: index.html is missing /${REPO}/assets/ paths"
               exit 1
             fi
           fi
