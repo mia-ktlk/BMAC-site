@@ -270,6 +270,36 @@
   margin-bottom: 3rem;
 }
 
+/* Home — hero masthead */
+.hero-masthead {
+  min-height: 100vh;
+}
+
+.hero-masthead__content {
+  padding-top: 10rem;
+  padding-bottom: 5rem;
+}
+
+@media (max-width: 767px) {
+  .hero-masthead {
+    min-height: min(70vh, 520px);
+  }
+
+  .hero-masthead__content {
+    padding-top: 4.25rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .hero-masthead__label {
+    margin-bottom: 0.5rem !important;
+  }
+
+  .hero-masthead__cta {
+    margin-top: 1.25rem !important;
+    gap: 1rem !important;
+  }
+}
+
 /* Home — team bio panel */
 .team-bio-panel {
   display: grid;

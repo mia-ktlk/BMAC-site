@@ -66,7 +66,7 @@ function Hero() {
     <section
       ref={sectionRef}
       id="home"
-      className="relative min-h-screen flex flex-col justify-end overflow-hidden"
+      className="hero-masthead relative flex flex-col justify-end overflow-hidden"
       style={{ background: gradientBg, transition: "background 0.6s ease" }}
       onMouseMove={handleMouseMove}
     >
@@ -125,10 +125,10 @@ function Hero() {
       />
 
       {/* Content */}
-      <div className="container relative pb-20 pt-40" style={{ zIndex: 2 }}>
+      <div className="container relative hero-masthead__content" style={{ zIndex: 2 }}>
         {/* BMAC acronym — slow breathing pulse */}
         <div
-          className="mb-6"
+          className="hero-masthead__label mb-6"
           style={{
             opacity: loaded ? 1 : 0,
             transform: loaded ? "translateY(0)" : "translateY(16px)",
@@ -181,7 +181,7 @@ function Hero() {
 
         {/* Tagline + CTA row */}
         <div
-          className="flex flex-col md:flex-row md:items-end gap-8 mt-12"
+          className="hero-masthead__cta flex flex-col md:flex-row md:items-end gap-8 mt-12"
           style={{
             opacity: loaded ? 1 : 0,
             transform: loaded ? "translateY(0)" : "translateY(24px)",
