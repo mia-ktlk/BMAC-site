@@ -6,8 +6,22 @@ import { defineConfig } from "vite";
 
 const plugins = [react(), tailwindcss(), jsxLocPlugin()];
 
+/** GitHub Pages project sites are served at /{repo}/; user sites at /. */
+function resolveBasePath(): string {
+  if (process.env.VITE_BASE_PATH) {
+    return process.env.VITE_BASE_PATH;
+  }
+  const repo = process.env.GITHUB_REPOSITORY?.split("/")[1];
+  if (repo) {
+    return repo.endsWith(".github.io") ? "/" : `/${repo}/`;
+  }
+  return "/";
+}
+
+const base = resolveBasePath();
+
 export default defineConfig({
-  base: process.env.VITE_BASE_PATH ?? "/",
+  base,
   plugins,
   resolve: {
     alias: {
