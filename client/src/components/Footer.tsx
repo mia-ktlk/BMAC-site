@@ -4,6 +4,7 @@
  * Cross-page anchor navigation: navigates to / then scrolls to section.
  * Mobile-responsive padding.
  */
+import { BMAC_LOGO_DECORATIVE_ALT } from "@/lib/imageAlt";
 import { withBase } from "@/lib/paths";
 import { scrollToSection, setPendingSectionScroll } from "@/lib/scrollNavigation";
 import { Link, useLocation } from "wouter";
@@ -97,7 +98,8 @@ export default function Footer() {
             <div className="flex items-center gap-3 mb-4">
               <img
                 src={withBase("/images/bmac-logo.png")}
-                alt="BMAC"
+                alt={BMAC_LOGO_DECORATIVE_ALT}
+                aria-hidden="true"
                 style={{ width: "40px", height: "40px", objectFit: "contain" }}
               />
               <span
@@ -209,7 +211,7 @@ export default function Footer() {
             >
               🎨 Website made by{" "}
               <a
-                href="https://helloitsmia.tech"
+                href="https://substack.com/@helloitsmia"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{

@@ -7,6 +7,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import { teamMemberPhotoAlt } from "@/lib/imageAlt";
 import { withBase } from "@/lib/paths";
 import { consumePendingSectionScroll, scrollToSectionWhenReady } from "@/lib/scrollNavigation";
 
@@ -694,7 +695,7 @@ function TeamCard({ member, delay, isOpen, onToggle }: {
           <img
             className="team-card-photo__portrait"
             src={withBase(member.photo)}
-            alt={member.name}
+            alt={teamMemberPhotoAlt(member)}
             width={600}
             height={600}
             loading="lazy"
@@ -793,7 +794,7 @@ function BioPanelContent({ member }: { member: typeof team[0] }) {
       <div className="team-bio-photo">
         <img
           src={withBase(member.photo)}
-          alt={member.name}
+          alt={teamMemberPhotoAlt(member)}
           width={64}
           height={64}
           loading="lazy"

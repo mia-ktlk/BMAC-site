@@ -5,6 +5,7 @@
  * Cross-page anchor navigation: navigate to / first, then scroll to anchor.
  */
 import { useEffect, useState } from "react";
+import { BMAC_LOGO_DECORATIVE_ALT } from "@/lib/imageAlt";
 import { withBase } from "@/lib/paths";
 import { scrollToSection, setPendingSectionScroll } from "@/lib/scrollNavigation";
 import { Link, useLocation } from "wouter";
@@ -105,6 +106,7 @@ export default function Nav() {
           {/* ── Logo ── */}
           <Link
             href="/"
+            aria-label="Boston Media Artists Collective home"
             style={{
               display: "flex",
               alignItems: "center",
@@ -115,7 +117,8 @@ export default function Nav() {
           >
             <img
               src={withBase("/images/bmac-logo.png")}
-              alt="BMAC"
+              alt={BMAC_LOGO_DECORATIVE_ALT}
+              aria-hidden="true"
               style={{ width: "34px", height: "34px", objectFit: "contain" }}
             />
             <span
